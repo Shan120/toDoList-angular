@@ -1,0 +1,52 @@
+<html>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular-animate.js"></script>
+  <body>
+    <script>
+      var app = angular.module("toDoList", ["ngAnimate"]);
+      app.controller("myCtrl", function($scope) {
+        // initial list
+        $scope.toDos = ["Buy food", "Clean kitten", "Read a book"];
+        // add item
+        $scope.addItem = function() {
+          $scope.toDos.push($scope.addMe);
+        };
+        // remove item
+        $scope.removeItem = function(x) {
+          $scope.toDos.splice(x, 1);
+        };
+        // tick done
+      });
+    </script>
+    <style>
+      table {
+        border: 1px dashed black;
+        border-collapse: separate;
+      }
+      tr,
+      td {
+        border: 1px solid black;
+        padding: 10px;
+      }
+    </style>
+    <h1>My to-do list</h1>
+    <div ng-app="toDoList" ng-controller="myCtrl">
+      <table>
+        <tr>
+          <th>To do</th>
+          <th>Remove</th>
+          <th>Done</th>
+        </tr>
+        <tr ng-repeat="x in toDos">
+          <td>{{x}}</td>
+          <td><span ng-click="removeItem($x)">&times</span></td>
+          <td><input type="checkbox" ng-model="done" /></td>
+        </tr>
+      </table>
+
+      <br />
+      <input ng-model="addMe" />
+      <button ng-click="addItem()">Add</button>
+    </div>
+  </body>
+</html>
